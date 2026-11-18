@@ -214,6 +214,8 @@ Os testes usam um banco temporário (o banco real não é tocado) e cobrem:
 - O SQLite embarcado atende bem a um pequeno grupo de voluntários; para uso intenso e simultâneo, migrar para PostgreSQL.
 - Sem recuperação de senha por e-mail e sem perfis de acesso (coordenador x voluntário).
 - **LGPD**: evite registrar dados pessoais sensíveis nas descrições. Em uso real, defina base legal, política de retenção e backups criptografados.
+
+- # Revisão técnica de arquitetura e segurança
 - Evoluções possíveis: controle de estoque com alerta de nível mínimo, triagem por documento, relatórios mensais e HTTPS atrás de proxy reverso.
 
 ## 👤 Autoria
