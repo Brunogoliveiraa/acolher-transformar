@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: build-and-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Atualizar pip e instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt coverage
+
+      - name: Validar sintaxe dos arquivos Python
+        run: python -m py_compile database.py auth.py app.py test_app.py
+
+      - name: Executar testes unitários com cobertura
+        run: |
+          coverage run -m unittest test_app.py
+          coverage report -m
